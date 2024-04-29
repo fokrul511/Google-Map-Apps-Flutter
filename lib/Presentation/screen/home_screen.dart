@@ -58,11 +58,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blue,
         title: const Text('Google Map Apps'),
         centerTitle: true,
       ),
       body: Center(
-        child: Text("Current Location:${position?.latitude},${position?.longitude}"),
+        child: Text(
+            "Current Location:${position?.latitude},${position?.longitude}"),
       ),
     );
   }
