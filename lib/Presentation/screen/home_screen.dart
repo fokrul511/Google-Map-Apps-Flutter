@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,12 +59,32 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
         title: const Text('Google Map Apps'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Text(
-            "Current Location:${position?.latitude},${position?.longitude}"),
+      body: GoogleMap(
+        zoomControlsEnabled: true,
+        initialCameraPosition: CameraPosition(
+          target: LatLng(24.439639, 91.859391),
+          zoom: 16.0,
+        ),
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        onTap: (LatLng latLng) {
+          print("tapped on map$latLng");
+        },
+        onLongPress: (LatLng latLng) {
+          print("on long Press$latLng");
+        },
+        markers: {
+          Marker(
+            markerId: MarkerId('My New Restureant'),
+            position: LatLng(24.444059540916477, 91.86442762613297),
+            infoWindow: InfoWindow(title: "My New Resturant"),
+            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta)
+          )
+        },
       ),
     );
   }
